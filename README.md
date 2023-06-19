@@ -31,7 +31,7 @@ $ git clone https://github.com/AhmedRS97/adef-camps.git
 2. Change into the project directory:
 
 ```
-$ cd education-camp-platform
+$ cd adef-camps
 ```
 
 3. Set up a virtual environment:
@@ -53,7 +53,7 @@ $ pip install -r requirements.txt
 $ python manage.py migrate
 ```
 
-6. Create a superuser (manager account):
+6. Create a super user:
 
 ```
 $ python manage.py createsuperuser

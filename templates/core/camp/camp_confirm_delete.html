@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "
+        معسكر:
+        {{ object.start_date |date:"F, Y" }} -
+        {{ object.end_date |date:"F, Y" }}"?
+    </p>
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}
