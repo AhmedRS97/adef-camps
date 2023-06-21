@@ -1,0 +1,12 @@
+@font-face {
+	font-family: "Tajawal";
+	src: url(../fonts/Tajawal/Tajawal-Medium.woff) format("woff");
+}
+html {
+	direction: rtl;
+}
+
+*,
+body {
+	font-family: "Tajawal", sans-serif;
+}
