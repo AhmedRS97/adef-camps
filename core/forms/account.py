@@ -8,12 +8,28 @@ class UserSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super(UserSignupForm, self).__init__(*args, **kwargs)
         self.fields["username"].widget.attrs |= {
-            "class": "test"
+            "class": "form-control"
+        }
+        self.fields["email"].widget.attrs |= {
+            "class": "form-control"
+        }
+        self.fields["password1"].widget.attrs |= {
+            "class": "form-control"
+        }
+        self.fields["password2"].widget.attrs |= {
+            "class": "form-control"
         }
 
 
+
 class ManagerSignupForm(UserSignupForm):
-    title = forms.CharField(label="المسمي", max_length=100)
+    def __init__(self, *args, **kwargs):
+        super(ManagerSignupForm, self).__init__(*args, **kwargs)
+        self.fields["title"].widget.attrs |= {
+            "class": "form-control"
+        }
+
+    title = forms.CharField(label="المسمي الوظيفى", max_length=100)
 
     def custom_signup(self, request, user):
         user.manager = Manager(title=self.cleaned_data['title'])
@@ -21,7 +37,13 @@ class ManagerSignupForm(UserSignupForm):
 
 
 class TrainerSignupForm(UserSignupForm):
-    title = forms.CharField(label="المسمي", max_length=100)
+    def __init__(self, *args, **kwargs):
+        super(TrainerSignupForm, self).__init__(*args, **kwargs)
+        self.fields["title"].widget.attrs |= {
+            "class": "form-control"
+        }
+        
+    title = forms.CharField(label="المسمي الوظيفى", max_length=100)
     bio = forms.CharField(
         label="السيرة الذاتية", widget=forms.Textarea(
             attrs={'class': 'form-control', 'placeholder': 'السيرة الذاتية'}
@@ -40,6 +62,16 @@ class TrainerSignupForm(UserSignupForm):
 
 
 class TraineeSignupForm(UserSignupForm):
+
+    def __init__(self, *args, **kwargs):
+        super(TraineeSignupForm, self).__init__(*args, **kwargs)
+        self.fields["age"].widget.attrs |= {
+            "class": "form-control"
+        }
+
+    username = forms.CharField( widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'اسم المستخدم'}
+        ))
     age = forms.DateTimeField(label="العمر")
     bio = forms.CharField(
         label="السيرة الذاتية", widget=forms.Textarea(attrs={
@@ -48,11 +80,15 @@ class TraineeSignupForm(UserSignupForm):
     )
     group = forms.ModelChoiceField(
         label="المجموعة", queryset=TraineeGroup.objects.all(),
-        required=False, blank=True
+        required=False, blank=True,widget=forms.Select(attrs={
+            'class': 'form-select'
+        })
     )
     track = forms.ModelChoiceField(
         label="التخصص", queryset=Track.objects.all(),
-        required=False, blank=True
+        required=False, blank=True,widget=forms.Select(attrs={
+            'class': 'form-select'
+        })
     )
 
     def custom_signup(self, request, user):
