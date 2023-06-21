@@ -1,25 +1,61 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load i18n %} {% block head_title %}{% trans "Sign
+In" %}{% endblock %} {% block content %}
 
-{% load i18n %}
+<div class="card p-5">
+	<h1>{% trans "Sign In" %}</h1>
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+	<p>
+		{% blocktrans %}إذا لم تكن قد قمت بإنشاء حساب بعد ، فمن فضلك
+		<a href="{{ signup_url }}" class="text-decoration-none">sign up</a> أولاً.{% endblocktrans %}
+	</p>
 
-{% block content %}
-
-<h1>{% trans "Sign In" %}</h1>
-
-
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
-
+	<form class="login" method="POST" action="{% url 'account_login' %}">
+		{% csrf_token %}
+		<div class="row">
+			<div class="form-group mt-3 col-md-6">
+				<label for="id_login" class="form-label">{{ form.login.label }}</label>
+				<input
+					type="text"
+					class="form-control"
+					name="login"
+					placeholder="اسم المستخدم"
+					autocomplete="username"
+					maxlength="150"
+					required=""
+					id="id_login"
+				/>
+			</div>
+			<div class="form-group mt-3 col-md-6">
+				<label for="id_password" class="form-label"
+					>{{ form.password.label }}</label
+				>
+				<input
+					type="password"
+					class="form-control"
+					name="password"
+					placeholder="كلمة المرور"
+					autocomplete="current-password"
+					required=""
+					id="id_password"
+				/>
+			</div>
+		</div>
+		{% if redirect_field_value %}
+		<input
+			type="hidden"
+			name="{{ redirect_field_name }}"
+			value="{{ redirect_field_value }}"
+		/>
+		{% endif %}
+		<a
+			class="button secondaryAction d-inline-block mt-3 text-decoration-none"
+			href="{% url 'account_reset_password' %}"
+			>{% trans "Forgot Password?" %}</a
+		>
+		<br />
+		<button class="primaryAction btn btn-primary mt-3" type="submit">
+			{% trans "Sign In" %}
+		</button>
+	</form>
+</div>
 {% endblock %}
