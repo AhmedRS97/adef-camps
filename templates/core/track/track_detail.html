@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Name: {{ track.name }}</h1>
+
+    <p>
+        <strong>Description:</strong>
+        {{ track.description }}
+    </p>
+
+    <h1>Sessions:</h1>
+    {% for session in track.sessions.all %}
+    <p>
+        {{ session.title}}
+    </p>
+    {% endfor %}
+
+{% endblock %}

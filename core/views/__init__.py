@@ -5,6 +5,33 @@ from .account import (
     ConfirmEmailView, PasswordResetView, PasswordResetDoneView,
     PasswordResetFromKeyDoneView, PasswordResetFromKeyView,
 )
+from .session import (
+    SessionDetailView, SessionListView, SessionCreateView,
+    SessionUpdateView, SessionDeleteView,
+)
+from .track import (
+    TrackDetailView, TrackListView, TrackCreateView,
+    TrackUpdateView, TrackDeleteView,
+)
+from .space import (
+    SpaceDetailView, SpaceListView, SpaceCreateView,
+    SpaceUpdateView, SpaceDeleteView
+)
+from .timeslot import (
+    TimeSlotDetailView, TimeSlotListView, TimeSlotCreateView,
+    TimeSlotUpdateView, TimeSlotDeleteView
+)
+
+from .camp import (
+    CampDetailView, CampListView, CampCreateView,
+    CampUpdateView, CampDeleteView
+)
+
+from .group import (
+    TraineeGroupDetailView, TraineeGroupListView, TraineeGroupCreateView,
+    TraineeGroupUpdateView, TraineeGroupDeleteView
+)
+
 
 signup_manager = ManagerSignupView.as_view()
 signup_trainer = TrainerSignupView.as_view()

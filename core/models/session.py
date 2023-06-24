@@ -15,7 +15,23 @@ class Session(models.Model):
         blank=True, null=True, on_delete=models.SET_NULL
     )
 
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("session_detail", kwargs={"pk": self.pk})
+
 
 class Track(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("track_detail", kwargs={"pk": self.pk})
